@@ -66,6 +66,7 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PreprocessorDefinitions>_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -79,6 +80,7 @@
       <DebugInformationFormat />
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PreprocessorDefinitions>_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -87,6 +89,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BdAPI\AddressAlgorithm.cpp" />
+    <ClCompile Include="BdAPI\AddressBuilder.cpp" />
+    <ClCompile Include="BdAPI\AddressParser.cpp" />
+    <ClCompile Include="BdAPI\BoDucApp.cpp" />
+    <ClCompile Include="BdAPI\BoDucFields.cpp" />
+    <ClCompile Include="BdAPI\BoDucParser.cpp" />
+    <ClCompile Include="BdAPI\BoDucReaderfix.cpp" />
+    <ClCompile Include="BdAPI\BoDucUtility.cpp" />
+    <ClCompile Include="BdAPI\PdfMinerAlgo.cpp" />
+    <ClCompile Include="BdAPI\PdfMinerReader.cpp" />
+    <ClCompile Include="BdAPI\VictoBonLivraison.cpp" />
+    <ClCompile Include="BdAPI\VictoReader.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="QtGuiAppBoduc.cpp" />
   </ItemGroup>
@@ -98,6 +112,22 @@
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="QtGuiAppBoduc.qrc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BdAPI\AddressAlgorithm.h" />
+    <ClInclude Include="BdAPI\AddressBuilder.h" />
+    <ClInclude Include="BdAPI\AddressParser.h" />
+    <ClInclude Include="BdAPI\BoDucApp.h" />
+    <ClInclude Include="BdAPI\BoDucBonLivraisonAlgorithm.h" />
+    <ClInclude Include="BdAPI\BoDucCsvReader.h" />
+    <ClInclude Include="BdAPI\BoDucFields.h" />
+    <ClInclude Include="BdAPI\BoDucParser.h" />
+    <ClInclude Include="BdAPI\BoDucReaderfix.h" />
+    <ClInclude Include="BdAPI\BoDucUtility.h" />
+    <ClInclude Include="BdAPI\PdfMinerAlgo.h" />
+    <ClInclude Include="BdAPI\PdfMinerReader.h" />
+    <ClInclude Include="BdAPI\VictoBonLivraison.h" />
+    <ClInclude Include="BdAPI\VictoReader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

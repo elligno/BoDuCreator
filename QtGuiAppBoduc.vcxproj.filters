@@ -23,6 +23,9 @@
       <Extensions>qrc;*</Extensions>
       <ParseFiles>false</ParseFiles>
     </Filter>
+    <Filter Include="BDAPI Files">
+      <UniqueIdentifier>{ca830cf0-8554-460f-a044-4774e0bb4172}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -30,6 +33,42 @@
     </ClCompile>
     <ClCompile Include="QtGuiAppBoduc.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BdAPI\AddressAlgorithm.cpp">
+      <Filter>BDAPI Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BdAPI\AddressBuilder.cpp">
+      <Filter>BDAPI Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BdAPI\AddressParser.cpp">
+      <Filter>BDAPI Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BdAPI\BoDucApp.cpp">
+      <Filter>BDAPI Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BdAPI\BoDucFields.cpp">
+      <Filter>BDAPI Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BdAPI\BoDucParser.cpp">
+      <Filter>BDAPI Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BdAPI\BoDucReaderfix.cpp">
+      <Filter>BDAPI Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BdAPI\BoDucUtility.cpp">
+      <Filter>BDAPI Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BdAPI\PdfMinerAlgo.cpp">
+      <Filter>BDAPI Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BdAPI\PdfMinerReader.cpp">
+      <Filter>BDAPI Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BdAPI\VictoBonLivraison.cpp">
+      <Filter>BDAPI Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BdAPI\VictoReader.cpp">
+      <Filter>BDAPI Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -46,5 +85,49 @@
     <QtRcc Include="QtGuiAppBoduc.qrc">
       <Filter>Resource Files</Filter>
     </QtRcc>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BdAPI\AddressAlgorithm.h">
+      <Filter>BDAPI Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BdAPI\AddressBuilder.h">
+      <Filter>BDAPI Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BdAPI\AddressParser.h">
+      <Filter>BDAPI Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BdAPI\BoDucApp.h">
+      <Filter>BDAPI Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BdAPI\BoDucBonLivraisonAlgorithm.h">
+      <Filter>BDAPI Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BdAPI\BoDucCsvReader.h">
+      <Filter>BDAPI Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BdAPI\BoDucFields.h">
+      <Filter>BDAPI Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BdAPI\BoDucParser.h">
+      <Filter>BDAPI Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BdAPI\BoDucReaderfix.h">
+      <Filter>BDAPI Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BdAPI\BoDucUtility.h">
+      <Filter>BDAPI Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BdAPI\PdfMinerAlgo.h">
+      <Filter>BDAPI Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BdAPI\PdfMinerReader.h">
+      <Filter>BDAPI Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BdAPI\VictoBonLivraison.h">
+      <Filter>BDAPI Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BdAPI\VictoReader.h">
+      <Filter>BDAPI Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
