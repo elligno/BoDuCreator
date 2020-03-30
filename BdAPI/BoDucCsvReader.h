@@ -8,7 +8,7 @@
 #include <map>
 #include <vector>
 // app include
-#include "BoDucFields.h"
+#include "BoDucCmdData.h"
 
 namespace bdAPI
 {
@@ -24,12 +24,12 @@ namespace bdAPI
 	public:
 		// will need to set some keyword of ... in the parsing process
 		//	bool containsMoreThanOne() const { return true; }
-		virtual void readNoCmd( const std::vector<std::string>& aCmdVec, BoDucFields& aBoducF) = 0;
-		virtual void readNoCmd( const std::string& aCmdVec, BoDucFields& aBoducF) = 0;
-		virtual void readShippedTo( const std::vector<std::string>& aCompleteAddress, BoDucFields& aBoducF) = 0;
-		virtual void readDeliveryDate( const std::string& aFieldValue, BoDucFields& aBoducF) = 0;
-		virtual void readProdDescr( const std::string& aCmdVec, BoDucFields& aBoducF) = 0;
-		virtual void readQtySilo( const std::string & aFieldValue, BoDucFields& aBoducF) = 0;
-		virtual void readProdCode( const std::string& aFieldValue, BoDucFields& aBoducF) = 0;
+		virtual void readNoCmd( const std::vector<std::string>& aCmdVec, BoDucCmdData& aBoducF) = 0;
+		virtual void readNoCmd( const std::string& aCmdVec, BoDucCmdData& aBoducF) = 0;
+		virtual void readShippedTo( const std::vector<std::string>& aCompleteAddress, BoDucCmdData& aBoducF) = 0;
+		virtual void readDeliveryDate( const std::string& aFieldValue, BoDucCmdData& aBoducF) = 0;
+		virtual void readProdDescr( const std::string& aCmdVec, BoDucCmdData& aBoducF) = 0;
+		virtual void readQtySilo( const std::string & aFieldValue, BoDucCmdData& aBoducF) = 0;
+		virtual void readProdCode( const std::string& aFieldValue, BoDucCmdData& aBoducF) = 0;
 	};
 } // End of namespace

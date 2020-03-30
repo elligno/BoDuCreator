@@ -46,9 +46,6 @@
     <ClCompile Include="BdAPI\BoDucApp.cpp">
       <Filter>BDAPI Files</Filter>
     </ClCompile>
-    <ClCompile Include="BdAPI\BoDucFields.cpp">
-      <Filter>BDAPI Files</Filter>
-    </ClCompile>
     <ClCompile Include="BdAPI\BoDucParser.cpp">
       <Filter>BDAPI Files</Filter>
     </ClCompile>
@@ -68,6 +65,9 @@
       <Filter>BDAPI Files</Filter>
     </ClCompile>
     <ClCompile Include="BdAPI\VictoReader.cpp">
+      <Filter>BDAPI Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BdAPI\BoDucCmdData.cpp">
       <Filter>BDAPI Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -105,9 +105,6 @@
     <ClInclude Include="BdAPI\BoDucCsvReader.h">
       <Filter>BDAPI Files</Filter>
     </ClInclude>
-    <ClInclude Include="BdAPI\BoDucFields.h">
-      <Filter>BDAPI Files</Filter>
-    </ClInclude>
     <ClInclude Include="BdAPI\BoDucParser.h">
       <Filter>BDAPI Files</Filter>
     </ClInclude>
@@ -127,6 +124,9 @@
       <Filter>BDAPI Files</Filter>
     </ClInclude>
     <ClInclude Include="BdAPI\VictoReader.h">
+      <Filter>BDAPI Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BdAPI\BoDucCmdData.h">
       <Filter>BDAPI Files</Filter>
     </ClInclude>
   </ItemGroup>

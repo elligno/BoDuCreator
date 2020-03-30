@@ -14,12 +14,12 @@
 //#include "VictoReader.h"
 //#include "BoDucReaderfix.h" // include VictoReader
 #include "PdfMinerReader.h"
-#include "BoDucFields.h"
+#include "BoDucCmdData.h"
 #include "PdfMinerAlgo.h"
 
 namespace bdAPI 
 {
-	void PdfMinerAlgo::fillBoDucFields( const std::vector<std::string>& aCmdVec, BoDucFields& aBoDucField)
+	void PdfMinerAlgo::fillBoDucFields( const std::vector<std::string>& aCmdVec, BoDucCmdData& aBoDucField)
 	{
 		// contains the original algorithm steps algorithm
 		using namespace std;
@@ -126,22 +126,22 @@ namespace bdAPI
 		}
 	}
 
-	void PdfMinerAlgo::addBoDucField(const BoDucFields& aField2Add)
+	void PdfMinerAlgo::addBoDucField(const BoDucCmdData& aField2Add)
 	{
 		m_vecOfStruct.push_back(aField2Add);
 	}
 
-	bool PdfMinerAlgo::containsBoDucField(const BoDucFields & aField2Look)
+	bool PdfMinerAlgo::containsBoDucField(const BoDucCmdData & aField2Look)
 	{
 		return false;
 	}
 
-	bool PdfMinerAlgo::removeBoDucField(const BoDucFields & aField2)
+	bool PdfMinerAlgo::removeBoDucField(const BoDucCmdData & aField2)
 	{
 		return false;
 	}
 	// need a re-factoring
-	void PdfMinerAlgo::getBoDucStruct(std::vector<BoDucFields>& aVec2Fill)
+	void PdfMinerAlgo::getBoDucStruct(std::vector<BoDucCmdData>& aVec2Fill)
 	{
 		aVec2Fill.reserve(m_vecOfStruct.size());
 		aVec2Fill = m_vecOfStruct;

@@ -37,7 +37,7 @@
 // test includes
 // Application include
 #include "BoDucReportCreator.h"
-#include "BdAPI/BoDucFields.h"
+#include "BdAPI/BoDucCmdData.h"
 #include "BdAPI/BoDucUtility.h"
 
 namespace {

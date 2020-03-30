@@ -14,7 +14,7 @@
 // App includes
 //#include "VictoReader.h"
 #include "BoDucReaderfix.h" // include VictoReader
-#include "BoDucFields.h"
+#include "BoDucCmdData.h"
 #include "VictoBonLivraison.h"
 //#include "Refactoring/TestAddressParserImpl.h"
 
@@ -46,7 +46,7 @@ bdAPI::VictoBonLivraison::~VictoBonLivraison()
 // Shall make use of the iterator such as transform iterator to retrive the 
 // information
 void bdAPI::VictoBonLivraison::fillBoDucFields( const std::vector<std::string>& aCmdVec, 
-	                                              BoDucFields& aBoDucField)
+	                                              BoDucCmdData& aBoDucField)
 {
 	// contains the original algorithm steps algorithm
 	using namespace std;
@@ -173,23 +173,23 @@ void bdAPI::VictoBonLivraison::fillBoDucFields( const std::vector<std::string>& 
 	}//for-loop
 }
 
-void bdAPI::VictoBonLivraison::addBoDucField(const BoDucFields & aField2Add)
+void bdAPI::VictoBonLivraison::addBoDucField(const BoDucCmdData & aField2Add)
 {
 	m_vecOfStruct.push_back(aField2Add);
 }
 
-bool bdAPI::VictoBonLivraison::containsBoDucField(const BoDucFields & aField2Look)
+bool bdAPI::VictoBonLivraison::containsBoDucField(const BoDucCmdData & aField2Look)
 {
 	// check for a specific field with given values
 	return false;
 }
 
-bool bdAPI::VictoBonLivraison::removeBoDucField(const BoDucFields & aField2)
+bool bdAPI::VictoBonLivraison::removeBoDucField(const BoDucCmdData & aField2)
 {
 	return false;
 }
 
-void bdAPI::VictoBonLivraison::getBoDucStruct( std::vector<BoDucFields>& aVec2Fill)
+void bdAPI::VictoBonLivraison::getBoDucStruct( std::vector<BoDucCmdData>& aVec2Fill)
 {
 	// check size before going any further, if size is zero, then nothing top copy 
 

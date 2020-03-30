@@ -25,6 +25,14 @@ namespace { // check if it is a valid character
 	{
 		return !(isalpha(c) || c == '_');
 	}
+
+	class line : public std::string {}; // placeholder
+
+	std::istream& operator>> (std::istream &is, line &l)
+	{
+		std::getline(is, l);
+		return is;
+	}
 }
 
 namespace bdAPI 
@@ -115,169 +123,243 @@ namespace bdAPI
 		}
 	}
 
-	void BoDucApp::readFile( const std::string& aFileAnPath, const std::string& aSplitBill)
-	{
-		using namespace std;
-		using namespace boost;
-		using namespace boost::algorithm;
+// 	void BoDucApp::readFile( const std::string& aFileAnPath, const std::string& aSplitBill)
+// 	{
+// 		using namespace std;
+// 		using namespace boost;
+// 		using namespace boost::algorithm;
+// 
+// 		// create alias
+// 		using vecofstr = std::vector<std::string>;
+// 		
+// 		// lambda (anonymous) function declaration
+// 		auto checkTransportName = [](const std::string& aStr2Look) -> bool
+// 		{
+// 			// Transporteur name (BoDuc)
+// 			return (contains(aStr2Look, "NIR R-117971-3 TRSP CPB INC")
+// 				|| contains(aStr2Look, "NIR R-117971-3 TRANSPORT CPB")
+// 				|| contains(aStr2Look, "NIR R-117971-3 C.P.B.")
+// 				|| contains(aStr2Look, "BODUC- ST-DAMASE")
+// 				|| contains(aStr2Look, "NIR R-004489-2 TR. BO-DUC"));     //sometime we have empty (blank field) string
+// 		};
+// 
+// 		// make sure that container are reset to zero size
+// 		resetContainerData(aFileAnPath);
+// 
+// 		// DESIGN NOTE these lines below could be re-written with the following 
+// 		// cleaner and easier to maintain
+// 		std::vector<std::string> w_vecStr;
+// 		w_vecStr.reserve(50); // reserve some memory 
+// 		std::ifstream w_readVSV("jani3156.csv");
+// 
+// 		if( w_readVSV) // is open
+// 		{
+// 			// just testing!!!
+// 			do {
+// 
+// 			} while (std::istream_iterator<line>(w_readVSV) != //begin range
+// 				       std::istream_iterator<line>()) // end range
+// 
+// 				std::copy_if( std::istream_iterator<line>(w_readVSV), //begin range
+// 				std::istream_iterator<line>(), //end range
+// 				std::back_inserter(m_vecfilePath), [this](const std::string& aStr2Cpy) -> bool
+// 			{
+// 				if( contains(aStr2Cpy, "signature"))
+// 				{
+// 					m_mapintVec.insert(make_pair(i++, std::move(std::vector<line>(m_vecfilePath.cbegin(), m_vecfilePath.cend()))));
+// 				}
+// 				//m_vecfilePath.clear();
+// 
+// 				//return !contains(aStr2Cpy, "signature"); // split bill in same file
+// 			});
+// 
+// 			// memory management
+// 			if (w_vecStr.size() < w_vecStr.capacity())
+// 			{
+// 				w_vecStr.shrink_to_fit();
+// 			}
+// 
+// 			// check for carrier name some are different and don't need to be treated
+// 			// Francois mentioned that field can be blank, need to be careful
+// 			if( any_of(w_vecStr.cbegin(), w_vecStr.cend(), checkTransportName))
+// 			{
+// 				m_mapintVec.insert(make_pair(i++, w_vecStr));
+// 				w_vecStr.clear();
+// 			}
+// 			else
+// 			{
+// 				QMessageBox w_msgBname;
+// 				QFileInfo w_filExtract(aFileAnPath.c_str());
+// 				const QString w_fileName = w_filExtract.fileName();
+// 				QString w_strMsg = QString("Not a valid transporteur name in ") + w_fileName;
+// 				w_msgBname.setText(w_strMsg);
+// 				w_msgBname.setIcon(QMessageBox::Warning);
+// 				w_msgBname.exec();
+// 				// ready for the next iteration
+// 				w_vecStr.clear();
+// 			}
+// 		}//if
+// 		else { // could not open
+// 			QMessageBox msgBox;
+// 			QFileInfo w_filExtract(aFileAnPath.c_str());
+// 			const QString w_fileName = w_filExtract.fileName();
+// 			QString w_strMsg = QString("The document ") + w_fileName + QString(" could not be opened.");
+// 			msgBox.setText(w_strMsg);
+// 			msgBox.setInformativeText("We try to fix it, do you want to proceed?");
+// 			msgBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+// 			msgBox.setIcon(QMessageBox::Warning);
+// 			int ret = msgBox.exec();
+// 		}
+// 
+// #if 0
+// 		// Command in one file, reading the command by splitting with the "Ordered on"
+// 		short i(0); // set to zero as default, otherwise set to whatever comes up
+// 		ifstream w_readVSV(m_fileName.c_str());
+// 		if (w_readVSV) // check if its open, then read line-by-line 
+// 		{
+// 			for (string line; std::getline(w_readVSV, line);)
+// 			{
+// 				if (i == 0) // first line is obsolete
+// 				{
+// 					// check if contains "Ordered on" as first line
+// 					// NOTE "request-2.csv" we split the bill with this token, 
+// 					// and format was that first line contains this string
+// 					if (contains(line, "Ordered on"))
+// 					{
+// 						++i;  // next line
+// 						continue; // i don't see why we should increment it
+// 					}
+// 				}//if(i==0)
+// 				w_vecStr.push_back(line);
+// 
+// 				// NOTE we assume that we are at the last line of the command
+// 				// then we check if the carrier string name is part of the whole 
+// 				// command (if so, add it to the map otherwise skip it)
+// 				// IMPORTANT this algorithm assume that we are at the end or the 
+// 				// last line (split into separate command is based on this assumption)
+// 				// if not the case then it won't work!!
+// 				if (contains(line, aSplitBill))
+// 				{
+// 					// check for carrier name some are different and don't need to be treated
+// 					// Francois mentioned that field can be blank, need to be careful
+// 					if (any_of(w_vecStr.cbegin(), w_vecStr.cend(), checkTransportName))
+// 					{
+// 						m_mapintVec.insert(make_pair(i++, w_vecStr));
+// 						w_vecStr.clear();
+// 					}
+// 					else
+// 					{
+// 						QMessageBox w_msgBname;
+// 						QFileInfo w_filExtract(aFileAnPath.c_str());
+// 						const QString w_fileName = w_filExtract.fileName();
+// 						QString w_strMsg = QString("Not a valid transporteur name in ") + w_fileName;
+// 						w_msgBname.setText(w_strMsg);
+// 						w_msgBname.setIcon(QMessageBox::Warning);
+// 						w_msgBname.exec();
+// 						// ready for the next iteration
+// 						w_vecStr.clear();
+// 					}
+// 				}
+// 			}//for-loop
+// 		}//if
+// 		else // file could not be opened because name invalid or something else
+// 		{
+// 			QMessageBox msgBox;
+// 			QFileInfo w_filExtract(aFileAnPath.c_str());
+// 			const QString w_fileName = w_filExtract.fileName();
+// 			QString w_strMsg = QString("The document ") + w_fileName + QString(" could not be opened.");
+// 			msgBox.setText(w_strMsg);
+// 			msgBox.setInformativeText("We try to fix it, do you want to proceed?");
+// 			msgBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+// 			msgBox.setIcon(QMessageBox::Warning);
+// 			int ret = msgBox.exec();
+// 		}
+// #endif // algorithm
+// 
+// 	}
 
-		// create alias
-		using vecofstr = std::vector<std::string>;
-		
-		// lambda (anonymous) function declaration
-		auto checkTransportName = [](const std::string& aStr2Look) -> bool
-		{
-			// Transporteur name (BoDuc)
-			return (contains(aStr2Look, "NIR R-117971-3 TRSP CPB INC")
-				|| contains(aStr2Look, "NIR R-117971-3 TRANSPORT CPB")
-				|| contains(aStr2Look, "NIR R-117971-3 C.P.B.")
-				|| contains(aStr2Look, "BODUC- ST-DAMASE")
-				|| contains(aStr2Look, "NIR R-004489-2 TR. BO-DUC"));     //sometime we have empty (blank field) string
-		};
-
-		if (!m_fileName.empty())
-		{
-			m_fileName.clear();
-		}
-
-		// check for accent in file name, if so fix it
-		if (std::find_if(aFileAnPath.cbegin(), aFileAnPath.cend(), charPredicate) != aFileAnPath.cend())
-		{
-			// we have special character, need to fix name without accent
-			std::wstring w_utf8FileName = BoDucUtility::FromUtf8ToUtf16(aFileAnPath);
-			m_fileName.assign(w_utf8FileName.cbegin(), w_utf8FileName.cend());
-		}
-		else
-		{
-			// csv file that we are processing
-			m_fileName.assign(aFileAnPath.cbegin(), aFileAnPath.cend());
-		}
-
-		// declare vector to store our string from csv document 
-		vecofstr w_vecStr;
-		w_vecStr.reserve(50); // reserve enough space for storing each line ??
-
-		// first time we go through we fill the map
-		// but next we go in (didn't close the app),
-		// we must empty the container ... i do not understand
-		if (!m_mapintVec.empty())
-		{
-			// clear all content
-			m_mapintVec.clear();
-
-			// sanity check
-			if (m_mapintVec.size() != 0)
-			{
-				std::cerr << "Map of lines not empty\n";
-			}
-		}
-
-		// Command in one file, reading the command by splitting with the "Ordered on"
-		short i(0); // set to zero as default, otherwise set to whatever comes up
-		ifstream w_readVSV(m_fileName.c_str());
-		if (w_readVSV) // check if its open, then read line-by-line 
-		{
-			for (string line; std::getline(w_readVSV, line);)
-			{
-				if (i == 0) // first line is obsolete
-				{
-					// check if contains "Ordered on" as first line
-					// NOTE "request-2.csv" we split the bill with this token, 
-					// and format was that first line contains this string
-					if (contains(line, "Ordered on"))
-					{
-						++i;  // next line
-						continue; // i don't see why we should increment it
-					}
-				}//if(i==0)
-				w_vecStr.push_back(line);
-
-				// NOTE we assume that we are at the last line of the command
-				// then we check if the carrier string name is part of the whole 
-				// command (if so, add it to the map otherwise skip it)
-				// IMPORTANT this algorithm assume that we are at the end or the 
-				// last line (split into separate command is based on this assumption)
-				// if not the case then it won't work!!
-				if (contains(line, aSplitBill))
-				{
-					// check for carrier name some are different and don't need to be treated
-					// Francois mentioned that field can be blank, need to be careful
-					if (any_of(w_vecStr.cbegin(), w_vecStr.cend(), checkTransportName))
-					{
-						m_mapintVec.insert(make_pair(i++, w_vecStr));
-						w_vecStr.clear();
-					}
-					else
-					{
-						QMessageBox w_msgBname;
-						QFileInfo w_filExtract(aFileAnPath.c_str());
-						const QString w_fileName = w_filExtract.fileName();
-						QString w_strMsg = QString("Not a valid transporteur name in ") + w_fileName;
-						w_msgBname.setText(w_strMsg);
-						w_msgBname.setIcon(QMessageBox::Warning);
-						w_msgBname.exec();
-						// ready for the next iteration
-						w_vecStr.clear();
-					}
-				}
-			}//for-loop
-		}//if
-		else // file could not be opened because name invalid or something else
-		{
-			QMessageBox msgBox;
-			QFileInfo w_filExtract(aFileAnPath.c_str());
-			const QString w_fileName = w_filExtract.fileName();
-			QString w_strMsg = QString("The document ") + w_fileName + QString(" could not be opened.");
-			msgBox.setText(w_strMsg);
-			msgBox.setInformativeText("We try to fix it, do you want to proceed?");
-			msgBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
-			msgBox.setIcon(QMessageBox::Warning);
-			int ret = msgBox.exec();
-		}
-	}
+// 	void BoDucApp::resetContainerData(const std::string &aFileAnPath)
+// 	{
+// 		if (!m_fileName.empty())
+// 		{
+// 			m_fileName.clear();
+// 		}
+// 
+// 		// check for accent in file name, if so fix it
+// 		if (std::find_if(aFileAnPath.cbegin(), aFileAnPath.cend(), charPredicate) != aFileAnPath.cend())
+// 		{
+// 			// we have special character, need to fix name without accent
+// 			std::wstring w_utf8FileName = BoDucUtility::FromUtf8ToUtf16(aFileAnPath);
+// 			m_fileName.assign(w_utf8FileName.cbegin(), w_utf8FileName.cend());
+// 		}
+// 		else
+// 		{
+// 			// csv file that we are processing
+// 			m_fileName.assign(aFileAnPath.cbegin(), aFileAnPath.cend());
+// 		}
+// 
+// 		// declare vector to store our string from csv document 
+// 		vecofstr w_vecStr;
+// 		w_vecStr.reserve(50); // reserve enough space for storing each line ??
+// 
+// 		// first time we go through we fill the map
+// 		// but next we go in (didn't close the app),
+// 		// we must empty the container ... i do not understand
+// 		if (!m_mapintVec.empty())
+// 		{
+// 			// clear all content
+// 			m_mapintVec.clear();
+// 
+// 			// sanity check
+// 			if (m_mapintVec.size() != 0)
+// 			{
+// 				std::cerr << "Map of lines not empty\n";
+// 			}
+// 		}
+// 	}
 
 	// Reading command file and fill the vector of string for each command.
 	// Added to a map to it is used  
-	void BoDucApp::readFiles( const std::list<std::string>& aFilesNameWithPath, const std::string& aSplitBill)
-	{
-		// Design Note:
-		//  We will need to add support to pdf files conversion. For now, 
-		//  we launch the python script for each file and produce a txt file. 
-		//  Steps
-		//  check files extension (must be all the same type) 
-		//  if pdf file, create a temporary list of the new converted files 
-		//  once its done process them 
-		//  
-		auto w_begListIter = aFilesNameWithPath.cbegin();
-		while( w_begListIter != aFilesNameWithPath.cend())
-		{
-			const std::string& w_fileName = *w_begListIter;
-			// call readFile
-			readFile( w_fileName, std::string("Signature"));
-
-			// check for number of command to proceed
-			size_t w_numCmd = nbOfCmd();
-			// check if it exist
-			if( m_nbOfCmdInFile.find(w_fileName) != m_nbOfCmdInFile.cend())
-			{
-				continue; // not sure about this one!!
-			}
-			m_nbOfCmdInFile.insert( std::make_pair(*w_begListIter,w_numCmd));
-
-			// push m_mapIntVec into vector
-			// vector provide a push_back() that support the move semantic  
-			// since we don't need the content of the map for next iteration
-			// might as well to move its content, is that make sense?
-			// don't copy something that i am not going to use 
-			m_vecOfMap.push_back( std::move(m_mapintVec)); // can i do that? why not
-
-			// sanity check
-			assert(0 == m_mapintVec.size()); // according to the move semantic
-			++w_begListIter; // next in the list
-		}
-
-		// now supporting multiple file selection from user
-	}
+// 	void BoDucApp::readFiles( const std::list<std::string>& aFilesNameWithPath, const std::string& aSplitBill)
+// 	{
+// 		// Design Note:
+// 		//  We will need to add support to pdf files conversion. For now, 
+// 		//  we launch the python script for each file and produce a txt file. 
+// 		//  Steps
+// 		//  check files extension (must be all the same type) 
+// 		//  if pdf file, create a temporary list of the new converted files 
+// 		//  once its done process them 
+// 		//  
+// 		auto w_begListIter = aFilesNameWithPath.cbegin();
+// 		while( w_begListIter != aFilesNameWithPath.cend())
+// 		{
+// 			const std::string& w_fileName = *w_begListIter;
+// 			// call readFile
+// 			readFile( w_fileName, std::string("Signature"));
+// 
+// 			// check for number of command to proceed
+// 			size_t w_numCmd = nbOfCmd();
+// 			// check if it exist
+// 			if( m_nbOfCmdInFile.find(w_fileName) != m_nbOfCmdInFile.cend())
+// 			{
+// 				continue; // not sure about this one!!
+// 			}
+// 			m_nbOfCmdInFile.insert( std::make_pair(*w_begListIter,w_numCmd));
+// 
+// 			// push m_mapIntVec into vector
+// 			// vector provide a push_back() that support the move semantic  
+// 			// since we don't need the content of the map for next iteration
+// 			// might as well to move its content, is that make sense?
+// 			// don't copy something that i am not going to use 
+// 			m_vecOfMap.push_back( std::move(m_mapintVec)); // can i do that? why not
+// 
+// 			// sanity check
+// 			assert(0 == m_mapintVec.size()); // according to the move semantic
+// 			++w_begListIter; // next in the list
+// 		}
+// 
+// 		// now supporting multiple file selection from user
+// 	}
 
 	// deprecated
 	void BoDucApp::createReport( const std::string & aBonDeLivraison)
@@ -295,7 +377,7 @@ namespace bdAPI
 		w_bonLivraison << "No Command " << "\t" << "Shipped To " << "\t" << "Deliver Date " << "\t" <<
 			"Product " << "\t" << "Quantity " << "\t" << "Silo" << "\n";
 
-		for( const BoDucFields& w_bfield : m_reportData)
+		for( const BoDucCmdData& w_bfield : m_reportData)
 		{
 				w_bonLivraison << w_bfield.m_noCmd << "\t" << w_bfield.m_deliverTo << "\t" << w_bfield.m_datePromise
 					<< "\t" << w_bfield.m_produit << "\t" << w_bfield.m_qty << "\t" << w_bfield.m_silo << "\n";

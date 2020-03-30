@@ -7,7 +7,7 @@
 #include <boost/algorithm/string/split.hpp> // splitting algo
 // App includes
 #include "BoDucParser.h"
-#include "BoDucFields.h"
+#include "BoDucCmdData.h"
 #include "PdfMinerAlgo.h"
 //#include "BoDucBonLivraisonAlgorithm.h"
 
@@ -51,7 +51,7 @@ namespace bdAPI
 			}
 
 			// filling the BoDuc struct	
-			BoDucFields w_boducStruct;
+			BoDucCmdData w_boducStruct;
 			if( aBonLivraisonAlgo != nullptr)
 			{
 				aBonLivraisonAlgo->fillBoDucFields(w_cmd2Proceed, w_boducStruct);

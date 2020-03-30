@@ -93,7 +93,7 @@
     <ClCompile Include="BdAPI\AddressBuilder.cpp" />
     <ClCompile Include="BdAPI\AddressParser.cpp" />
     <ClCompile Include="BdAPI\BoDucApp.cpp" />
-    <ClCompile Include="BdAPI\BoDucFields.cpp" />
+    <ClCompile Include="BdAPI\BoDucCmdData.cpp" />
     <ClCompile Include="BdAPI\BoDucParser.cpp" />
     <ClCompile Include="BdAPI\BoDucReaderfix.cpp" />
     <ClCompile Include="BdAPI\BoDucUtility.cpp" />
@@ -120,7 +120,7 @@
     <ClInclude Include="BdAPI\BoDucApp.h" />
     <ClInclude Include="BdAPI\BoDucBonLivraisonAlgorithm.h" />
     <ClInclude Include="BdAPI\BoDucCsvReader.h" />
-    <ClInclude Include="BdAPI\BoDucFields.h" />
+    <ClInclude Include="BdAPI\BoDucCmdData.h" />
     <ClInclude Include="BdAPI\BoDucParser.h" />
     <ClInclude Include="BdAPI\BoDucReaderfix.h" />
     <ClInclude Include="BdAPI\BoDucUtility.h" />

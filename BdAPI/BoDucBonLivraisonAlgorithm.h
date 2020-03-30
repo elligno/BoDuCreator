@@ -2,7 +2,7 @@
 
 #include <vector>
 
-#include "BoDucFields.h"
+#include "BoDucCmdData.h"
 
 namespace bdAPI
 {
@@ -15,12 +15,12 @@ namespace bdAPI
 		// shall i provide a virtual dtor??
 		virtual ~BoDucBonLivraisonAlgorithm() = default;
 		// return the BoDucFields ... to be completed
-		virtual void fillBoDucFields( const std::vector<std::string>& aCmdVec, BoDucFields& aBoDucField) = 0;
+		virtual void fillBoDucFields( const std::vector<std::string>& aCmdVec, BoDucCmdData& aBoDucField) = 0;
 		//TODO create a class VectorBoDucFields which implement these methods
-		virtual void addBoDucField( const BoDucFields& aField2Add) = 0; // deprecated
-		virtual bool containsBoDucField( const BoDucFields& aField2Look) = 0; 
-		virtual bool removeBoDucField( const BoDucFields& aField2) = 0;
-		virtual void getBoDucStruct( std::vector<BoDucFields>& aVec2Fill) = 0;
+		virtual void addBoDucField( const BoDucCmdData& aField2Add) = 0; // deprecated
+		virtual bool containsBoDucField( const BoDucCmdData& aField2Look) = 0; 
+		virtual bool removeBoDucField( const BoDucCmdData& aField2) = 0;
+		virtual void getBoDucStruct( std::vector<BoDucCmdData>& aVec2Fill) = 0;
 		virtual  size_t getnbOfCmd() = 0;
 	};
 } // End of namespace

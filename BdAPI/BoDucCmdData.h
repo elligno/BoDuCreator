@@ -11,26 +11,26 @@
 
 namespace bdAPI
 {
-	struct BoDucFields : public boost::equality_comparable<BoDucFields>,
-		public boost::less_than_comparable<BoDucFields>
+	struct BoDucCmdData : public boost::equality_comparable<BoDucCmdData>,
+		public boost::less_than_comparable<BoDucCmdData>
 	{
 		// alias <cmdNo, shippedTo, deliveryDate,prod code, prod, qty,silo>
 		using bdTpl = std::tuple<std::string, std::string, std::string, long, std::string,float, std::string>;
 		
 		// default ctor
-		BoDucFields();
+		BoDucCmdData();
 		//move semantic
-		BoDucFields( bdTpl&& aTpl);
+		BoDucCmdData( bdTpl&& aTpl);
 
-		friend bool operator== (const BoDucFields& aField1, const BoDucFields& aField2)
+		friend bool operator== (const BoDucCmdData& aField1, const BoDucCmdData& aField2)
 		{
 			return (aField1.m_noCmd == aField2.m_noCmd) ? true : false;
 		}
-		friend bool operator< (const BoDucFields& aField1, const BoDucFields& aField2)
+		friend bool operator< (const BoDucCmdData& aField1, const BoDucCmdData& aField2)
 		{
 			return (aField1.m_datePromise < aField2.m_datePromise) ? true : false;
 		}
-		friend std::ostream& operator<< (std::ostream& stream, const BoDucFields& aBdF)
+		friend std::ostream& operator<< (std::ostream& stream, const BoDucCmdData& aBdF)
 		{
 			stream << aBdF.m_noCmd << " " << aBdF.m_datePromise << " " << aBdF.m_deliverTo <<
 				" " << aBdF.m_produit << " " << aBdF.m_prodCode << " " << aBdF.m_silo << " " << aBdF.m_qty << "\n";

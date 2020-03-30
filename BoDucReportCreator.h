@@ -7,7 +7,7 @@
 #include "ui_BoDucReportCreator.h"
 
 // App. includes
-#include "BdAPI/BoDucFields.h"
+#include "BdAPI/BoDucCmdData.h"
 #include "BdAPI/BoDucApp.h"
 
 // forward declaration
@@ -29,9 +29,9 @@ class QTableWidgetItem;
 
 namespace bdApp 
 {
-	class BoDucReportCreator : public QWidget
+	class BoDucReportCreator //: public QWidget
 	{
-		Q_OBJECT
+	//	Q_OBJECT
 
 		// set the capacity load according to time period of the year
 		enum class eCapacityMode
@@ -46,7 +46,7 @@ namespace bdApp
 			dateRange=2 // display cmd form a date range 
 		};
 	public:
-		BoDucReportCreator( QWidget *parent = Q_NULLPTR);
+//		BoDucReportCreator( QWidget *parent = Q_NULLPTR);
 		BoDucReportCreator( const BoDucReportCreator& aOther)=delete;
 
 		BoDucReportCreator& operator= (const BoDucReportCreator& aOther) = delete;

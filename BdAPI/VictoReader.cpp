@@ -31,7 +31,7 @@
 		//
 		// Services that are needed to fill the BoDuc field structure
 		//
-		void VictoReader::readNoCmd(const vecofstr& aCmdVec, BoDucFields& aBoducF)
+		void VictoReader::readNoCmd(const vecofstr& aCmdVec, BoDucCmdData& aBoducF)
 		{
 			using namespace std;
 			using namespace boost;
@@ -82,7 +82,7 @@
 			}
 		}
 
-		void VictoReader::readNoCmd( const std::string& aFieldValue, BoDucFields & aBoducF)
+		void VictoReader::readNoCmd( const std::string& aFieldValue, BoDucCmdData & aBoducF)
 		{
 			using namespace std;
 			using namespace boost;
@@ -98,7 +98,7 @@
 			}
 		}
 
-		void VictoReader::readShippedTo(const vecofstr& aFieldValue, BoDucFields& aBoducF)
+		void VictoReader::readShippedTo(const vecofstr& aFieldValue, BoDucCmdData& aBoducF)
 		{
 			using namespace std;
 			using namespace boost;
@@ -259,7 +259,7 @@
 			return w_nbCmd;
 		}
 
-		void VictoReader::readDeliveryDate(const std::string& aFieldValue, BoDucFields& aBoducF)
+		void VictoReader::readDeliveryDate(const std::string& aFieldValue, BoDucCmdData& aBoducF)
 		{
 			using namespace std;
 			using namespace boost;
@@ -322,7 +322,7 @@
 			//		aBoducF.m_datePromise = w_datepromise[0];
 		}
 
-		void VictoReader::readProdDescr( const std::string& aFieldValue, BoDucFields& aBoducF)
+		void VictoReader::readProdDescr( const std::string& aFieldValue, BoDucCmdData& aBoducF)
 		{
 			using namespace std;
 			using namespace boost;
@@ -352,7 +352,7 @@
 			aBoducF.m_produit = w_descrStr[0];
 		}
 
-		void VictoReader::readQtySilo(const std::string & aFieldValue, BoDucFields & aBoducF)
+		void VictoReader::readQtySilo(const std::string & aFieldValue, BoDucCmdData & aBoducF)
 		{
 			using namespace std;
 			using namespace boost;
@@ -458,7 +458,7 @@
 			}
 		}
 
-		void VictoReader::readProdCode(const std::string & aFieldValue, BoDucFields& aBoducF)
+		void VictoReader::readProdCode(const std::string & aFieldValue, BoDucCmdData& aBoducF)
 		{
 			using namespace std;
 			using namespace boost;

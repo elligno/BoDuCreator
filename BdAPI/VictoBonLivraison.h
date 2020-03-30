@@ -14,14 +14,14 @@ namespace bdAPI
 	public:
 		VictoBonLivraison();
 		~VictoBonLivraison();
-		void fillBoDucFields( const std::vector<std::string>& aCmdVec, BoDucFields& aBoDucField) override;
-		void addBoDucField( const BoDucFields& aField2Add) override;
-		bool containsBoDucField( const BoDucFields& aField2Look) override;
-		bool removeBoDucField( const BoDucFields& aField2) override;
+		void fillBoDucFields( const std::vector<std::string>& aCmdVec, BoDucCmdData& aBoDucField) override;
+		void addBoDucField( const BoDucCmdData& aField2Add) override;
+		bool containsBoDucField( const BoDucCmdData& aField2Look) override;
+		bool removeBoDucField( const BoDucCmdData& aField2) override;
 		size_t getnbOfCmd() override { return m_vecOfStruct.size(); }
-		void getBoDucStruct( std::vector<BoDucFields>& aVec2Fill) override;
+		void getBoDucStruct( std::vector<BoDucCmdData>& aVec2Fill) override;
 	private:
 		std::initializer_list<std::string> m_fieldKey;
-		std::vector<BoDucFields> m_vecOfStruct;
+		std::vector<BoDucCmdData> m_vecOfStruct;
 	};
 } // End of namespace

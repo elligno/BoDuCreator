@@ -1,8 +1,8 @@
 #include <iostream>
 
-#include "BoDucFields.h"
+#include "BoDucCmdData.h"
 
-bdAPI::BoDucFields::BoDucFields() 
+bdAPI::BoDucCmdData::BoDucCmdData() 
 : m_noCmd(""),
   m_datePromise(""),
   m_deliverTo(""),
@@ -16,7 +16,7 @@ bdAPI::BoDucFields::BoDucFields()
 }
 
 //TODO should declare a member 
-bdAPI::BoDucFields::BoDucFields( bdTpl && aTpl)
+bdAPI::BoDucCmdData::BoDucCmdData( bdTpl && aTpl)
 {
 	// to be completed
 	m_noCmd       = std::get<0>(aTpl);

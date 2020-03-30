@@ -6,13 +6,14 @@
 #include <list>
 #include <map>
 // App include
-#include "BoDucFields.h"
+#include "BoDucCmdData.h"
 
 // Good reference: https://solarianprogrammer.com/2011/10/16/cpp-11-raw-strings-literals-tutorial/
 
 namespace bdAPI { class BoDucBonLivraisonAlgorithm; }
 namespace bdAPI 
 {
+
 	class BoDucApp 
 	{
 	public:
@@ -56,18 +57,19 @@ namespace bdAPI
 		}
 
 		// return data that was processed
-		std::vector<BoDucFields> getReportData() 
-		{ return std::vector<BoDucFields>(m_reportData.cbegin(),m_reportData.cend()); }
+		std::vector<BoDucCmdData> getReportData() 
+		{ return std::vector<BoDucCmdData>(m_reportData.cbegin(),m_reportData.cend()); }
 
     // return the number of command to process
 		virtual void process();
 		
 		// parse and fill data structure 
-		virtual void readFile( const std::string& aFileAnPath,
-		                       const std::string& aSplitBill = "Ordered on");
+// 		virtual void readFile( const std::string& aFileAnPath,
+// 		                       const std::string& aSplitBill = "Ordered on");
 
-		virtual void readFiles( const std::list<std::string>& aFilesNameWithPath,
-			const std::string& aSplitBill = "Ordered on");
+
+// 		virtual void readFiles( const std::list<std::string>& aFilesNameWithPath,
+// 			const std::string& aSplitBill = "Ordered on");
 
 		// Use the BoDuc writer for report formatting (deprecated)
 		virtual void createReport( const std::string& aBonDeLivraison = "BonDeLivraison.txt");
@@ -84,13 +86,16 @@ namespace bdAPI
 		std::string m_fileName;
 		std::string m_workDir;
 		std::string m_bonLivraison;
-		BoDucFields m_readPrm;
+		BoDucCmdData m_readPrm;
 		mapIntVecstr m_mapintVec;
 		std::map<std::string, size_t> m_nbOfCmdInFile; 
 		std::vector<mapIntVecstr> m_vecOfMap; // multiple file selection support
-		std::vector<BoDucFields> m_reportData;
+		std::vector<BoDucCmdData> m_reportData;
 		BoDucBonLivraisonAlgorithm* m_bdParseAlgorithm;
 		unsigned short m_userSelectF;
 		eFileType m_fileExt;
+
+		// helper methods
+		void resetContainerData( const std::string &aFileAnPath);
 	};
 } // End of namespace

@@ -6,7 +6,7 @@
 #include <vector>
 #include <map>
 // App include
-#include "BoDucFields.h"
+#include "BoDucCmdData.h"
 
 // forward declaration
 namespace bdAPI { class BoDucBonLivraisonAlgorithm; }
@@ -33,13 +33,13 @@ namespace bdAPI
 		// part of refactoring
 		virtual void extractData(const mapIntVecstr& aListOfCmd);
 		// return vector of al cmd
-		std::vector<BoDucFields> getBdFields() { return m_bdStruct; }
+		std::vector<BoDucCmdData> getBdFields() { return m_bdStruct; }
 	private:
 		//shall be in the BdApp class
 		bool useTM( const std::vector<std::string>& aVecOfCmdLines);
 
 		// part of the refactoring
 		BoDucBonLivraisonAlgorithm* m_parserAlgo; 
-		std::vector<BoDucFields> m_bdStruct;
+		std::vector<BoDucCmdData> m_bdStruct;
 	};
 } // End of namespace

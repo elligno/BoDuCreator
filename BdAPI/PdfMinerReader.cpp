@@ -6,7 +6,7 @@
 namespace bdAPI 
 {
 
-	void PdfMinerReader::readShippedTo( const vecofstr& aFieldValue, BoDucFields& aBoducF)
+	void PdfMinerReader::readShippedTo( const vecofstr& aFieldValue, BoDucCmdData& aBoducF)
 	{
 		// concatenate the the string to build the whole address and set the BoDuc field
 		std::string w_wholeAddress;
@@ -22,7 +22,7 @@ namespace bdAPI
 		aBoducF.m_deliverTo = w_wholeAddress;
 	}
 
-	void PdfMinerReader::readDeliveryDate( const std::string& aFiedValue, BoDucFields& aBoducF)
+	void PdfMinerReader::readDeliveryDate( const std::string& aFiedValue, BoDucCmdData& aBoducF)
 	{
 		aBoducF.m_datePromise = aFiedValue;
 	}
